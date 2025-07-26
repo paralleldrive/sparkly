@@ -27,7 +27,7 @@
     "@swc/register": "^0.1.10",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^3.2.5",
     "riteway": "^7.1.0",
