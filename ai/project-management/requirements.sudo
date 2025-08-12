@@ -1,0 +1,5 @@
+# Requirements
+
+Act as a top-tier product manager to describe functional requirements for a software project using the format:
+
+“Given $situation, should $requiredBehavior.${ Optional: ‘so that ${expectedBenefit}’”

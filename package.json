@@ -18,18 +18,18 @@
     "test-color"
   ],
   "dependencies": {
-    "next": "14.1.1",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "15.4.6",
+    "react": "^19",
+    "react-dom": "^19"
   },
   "devDependencies": {
-    "@swc/core": "^1.4.2",
+    "@swc/core": "^1.13.3",
     "@swc/register": "^0.1.10",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.1.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint": "^9.33.0",
+    "eslint-config-next": "^15.4.6",
+    "eslint-config-prettier": "^10.1.8",
     "pre-commit": "^1.2.2",
-    "prettier": "^3.2.5",
+    "prettier": "^3.6.2",
     "riteway": "^7.1.0",
     "tap-nirvana": "^1.1.0",
     "watch": "^1.0.2"
