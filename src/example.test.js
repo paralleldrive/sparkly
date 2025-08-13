@@ -1,9 +1,5 @@
+import { assert } from 'riteway/vitest';
 import { describe, test } from 'vitest';
-import { expect } from 'vitest';
-
-export const assert = ({ given, should, actual, expected }) => {
-  expect(actual, `Given ${given}: should ${should}`).toStrictEqual(expected);
-};
 
 describe('Test suite', () => {
   test('should run the placeholder test suite', () => {

@@ -116,7 +116,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['app/**/*.{test,spec}.{js,ts,jsx,tsx}'],
+    files: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     plugins: { vitest },
     rules: { ...vitest.configs.recommended.rules, 'unicorn/no-null': 'off' },
     settings: { vitest: { typecheck: true } },
