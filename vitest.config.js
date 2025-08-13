@@ -27,6 +27,7 @@ const testConfig = defineConfig({
           environment: 'happy-dom',
           include: ['src/**/*.test.{jsx,tsx}'],
           name: 'react-happy-dom-tests',
+          setupFiles: ['src/tests/setup-browser-test-environment.jsx'],
         },
       },
     ],
