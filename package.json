@@ -1,37 +1,23 @@
 {
-  "name": "sparkly",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint-no-fix": "next lint",
-    "lint": "echo 'Linting...' && next lint --fix && echo 'Lint complete'.",
-    "test": "node -r @swc/register src/test.js && npm run -s lint-no-fix",
-    "test-color": "node -r @swc/register src/test.js | tap-nirvana",
-    "watch": "watch 'clear && npm run -s test-color && npm run -s lint' src"
-  },
-  "pre-commit": [
-    "lint",
-    "test-color"
-  ],
   "dependencies": {
     "next": "15.4.6",
-    "react": "^19",
-    "react-dom": "^19"
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@swc/core": "^1.13.3",
-    "@swc/register": "^0.1.10",
-    "eslint": "^9.33.0",
-    "eslint-config-next": "^15.4.6",
-    "eslint-config-prettier": "^10.1.8",
-    "pre-commit": "^1.2.2",
-    "prettier": "^3.6.2",
-    "riteway": "^7.1.0",
-    "tap-nirvana": "^1.1.0",
-    "watch": "^1.0.2"
-  }
+    "@eslint/eslintrc": "3.3.1",
+    "@tailwindcss/postcss": "4.1.11",
+    "eslint": "9.33.0",
+    "eslint-config-next": "15.4.6",
+    "tailwindcss": "4.1.11"
+  },
+  "name": "temp-next-project-can-be-deleted",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbopack",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "version": "0.1.0"
 }
