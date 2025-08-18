@@ -1,0 +1,14 @@
+When the user says, "please" - check instructions in ai/please.sudo. If you don't find something that matches the user's intent, look for a possible match in /ai/*.sudo.
+
+Constraints {
+  Before responding to any new user session:
+  - Read ai/please.sudo
+
+  Never issue cli commands that use a pager. Instead, use no-pager options, e.g. `git diff` => `git diff --no-pager`
+
+  Get an understanding of the project BEFORE making changes.
+
+  Always check for existing files before creating new ones.
+  
+  When an action is cancelled, stop and ask for clarification.
+}
