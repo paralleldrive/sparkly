@@ -1,53 +1,104 @@
 meta:
   projectName: Sparkly
   Agent: SudoBuilder
-description: Sparkly is an open-source AI-first platform for learning and course creation. It is a place where you can learn new things, create new AI-driven courses, share your courses with others, and earn money. Be inspired and inspire others. Our motto is "Ignite Learning, Inspire Creation".
+description: Sparkly is an open-source AI-first platform focused on creating exceptional learning experiences. Starting with a course player and AI mentorship UX that helps students consume structured learning content with personalized AI assistance. Our motto is "Ignite Learning, Inspire Creation".
 techStack: Next.js, React, Redux, LLM (beginning with OpenAI GPT-4), Magic.link for passwordless authentication and transactions, Supabase
-projectGoals: Allow educators to earn a living by teaching and inspiring passionate learners with the help of AI.
+projectGoals: Create an engaging course consumption experience where students can learn effectively with AI assistance, starting by dogfooding with our own course.
+constraints:
+  - Keep technical implementation details separate from user experience requirements
+  - Focus on course player/mentorship UX rather than course management systems
+  - Generic course consumption patterns, not specific course content
 userJourneys:
-  - journeyId: quickstart-registration-and-introduction
-    name: Quickstart Registration and Introduction
-    description: This journey outlines the steps a new user takes to register on Sparkly using Magic Connect for a smooth, secure authentication experience, setting the stage for their involvement with the platform.
+  - journeyId: student-course-discovery-to-learning
+    name: Student Course Discovery to Learning
+    description: The complete student journey from discovering a course through engaging with learning content and AI mentorship.
     steps:
-      - stepId: landing-on-sparkly
-        name: Landing on Sparkly
-        description: User lands on Sparkly homepage and is greeted with an overview.
-        stories: []
-      - stepId: authenticate-with-magic-connect
-        name: Authenticate with Magic Connect
-        description: User chooses to sign up and is guided through the Magic Connect authentication workflow.
+      - stepId: course-landing-discovery
+        name: Course Landing Discovery
+        description: Student discovers a course landing page and evaluates if it meets their learning needs.
         stories:
-          - authenticate-with-magic-connect
-      - stepId: welcome-and-initial-engagement
-        name: Welcome and Initial Engagement
-        description: Successfully authenticated user is welcomed and briefly guided on how to explore Sparkly.
+          - evaluate-course-fit
+          - preview-course-content
+      - stepId: passwordless-course-access
+        name: Passwordless Course Access
+        description: Student authenticates to gain access to course content without password friction.
         stories:
-          - receive-platform-overview
+          - authenticate-for-course-access
+          - returning-student-signin
+      - stepId: course-learning-experience
+        name: Course Learning Experience
+        description: Student engages with course content, exercises, and AI mentorship to achieve learning goals.
+        stories:
+          - start-learning-immediately
+          - engage-with-ai-mentor
+          - track-learning-progress
+          - practice-with-exercises
     personas:
-      - Educators and Content Creators
       - Learners
-      - Developers and Tech Enthusiasts
-      - Entrepreneurs and Freelancers
+      - Students
+      - Professionals seeking skill development
 stories:
-  authenticate-with-magic-connect:
-    storyId: authenticate-with-magic-connect
-    name: Authenticate with Magic Connect
-    description: As a new user, when I sign up, I want to authenticate using Magic Connect, so that I can securely access Sparkly without needing a password.
+  evaluate-course-fit:
+    storyId: evaluate-course-fit
+    name: Evaluate Course Fit
+    description: As a potential student, I want to understand what a course covers and its learning outcomes, so that I can decide if this course meets my learning goals.
     tasks: []
     journeys:
-      - quickstart-registration-and-introduction
-  receive-platform-overview:
-    storyId: receive-platform-overview
-    name: Receive Platform Overview
-    description: As a newly registered user, I want to receive a brief overview of what I can do on Sparkly, so that I feel welcomed and know where to start exploring.
+      - student-course-discovery-to-learning
+  preview-course-content:
+    storyId: preview-course-content
+    name: Preview Course Content
+    description: As a visitor, I want to preview course content for free, so that I can evaluate the teaching quality and style before committing to the full course.
     tasks: []
     journeys:
-      - quickstart-registration-and-introduction
+      - student-course-discovery-to-learning
+  authenticate-for-course-access:
+    storyId: authenticate-for-course-access
+    name: Authenticate for Course Access
+    description: As a new student, I want to authenticate without creating passwords, so that I can quickly and securely access my course content.
+    tasks: []
+    journeys:
+      - student-course-discovery-to-learning
+  returning-student-signin:
+    storyId: returning-student-signin
+    name: Returning Student Sign-in
+    description: As a returning student, I want to sign in seamlessly using my device, so that I can get back to learning immediately without authentication friction.
+    tasks: []
+    journeys:
+      - student-course-discovery-to-learning
+  start-learning-immediately:
+    storyId: start-learning-immediately
+    name: Start Learning Immediately
+    description: As a new student, I want to dive straight into course content after signing up, so that I can start learning without delays or confusion.
+    tasks: []
+    journeys:
+      - student-course-discovery-to-learning
+  engage-with-ai-mentor:
+    storyId: engage-with-ai-mentor
+    name: Engage with AI Mentor
+    description: As a student, I want AI assistance when I'm stuck on concepts or exercises, so that I can continue learning without frustration and get personalized explanations.
+    tasks: []
+    journeys:
+      - student-course-discovery-to-learning
+  track-learning-progress:
+    storyId: track-learning-progress
+    name: Track Learning Progress
+    description: As a course participant, I want to see my progress through the course, so that I can understand how far I've come and what's next in my learning journey.
+    tasks: []
+    journeys:
+      - student-course-discovery-to-learning
+  practice-with-exercises:
+    storyId: practice-with-exercises
+    name: Practice with Exercises
+    description: As a learner, I want to practice with coding exercises and receive immediate feedback, so that I can apply concepts and reinforce my understanding.
+    tasks: []
+    journeys:
+      - student-course-discovery-to-learning
 tasks: {}
 taskQueue: []
 longTermMemory: []
 shortTermMemory: []
 projectStatus:
-  recentlyFinished: ""
-  currentFocus: Defining user journeys and creating user stories for new user registration and initial platform engagement.
-agents: ReactDeveloper ReduxDeveloper APIDesigner GraphQLExpert AIWhisperer Illustrator Photographer MotionDesigner UserResearcher
+  recentlyFinished: "Updated project focus to prioritize student learning experience over course creation tools"
+  currentFocus: Building course player and AI mentorship UX for optimal student learning experience, starting with dogfooding approach.
+agents: ReactDeveloper ReduxDeveloper APIDesigner AIWhisperer UserResearcher UXDesigner
