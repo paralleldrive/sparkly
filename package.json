@@ -53,7 +53,7 @@
     "lint": "next lint",
     "prepare": "husky",
     "start": "next start",
-    "test": "vitest --reporter=verbose"
+    "test": "vitest --reporter=verbose --run"
   },
   "type": "module",
   "version": "0.1.0"
