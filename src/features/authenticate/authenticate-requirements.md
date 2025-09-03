@@ -6,13 +6,11 @@ Passkey is first-class - primary sign-in mechanism.
 
 Sign Up flow:
 
-Given a new user signing up, should prompt for email and auth with email magic
-link so that we have a reliable fallback to add/manage passkeys Given a user
-signing in with email magic link, after the magic link auth succeeds, should
-present the user with passkey auth Given a user attempting to sign in with the
-same magic link a second time, should inform the user that the link is expired
-and offer passkey auth, or a new link, instead
+Given a new user signing up, the system should prompt for email and authenticate with an email magic link so that we have a reliable fallback to add or manage passkeys.
 
+Given a user signing in with an email magic link, after the magic link authentication succeeds, the system should present the user with passkey authentication.
+
+Given a user attempting to sign in with the same magic link a second time, the system should inform the user that the link is expired and offer passkey authentication or a new link instead.
 Sign in flow:
 
 Given an existing user signing in, should prompt for passkey authentication, and
