@@ -9,10 +9,13 @@ const rootConfig = defineConfig({
 
 const testConfig = defineConfig({
   test: {
-    workspace: [
+    projects: [
       {
         ...rootConfig,
-        test: { include: ['src/**/*.test.{js,ts}'], name: 'unit-tests' },
+        test: {
+          include: ['src/**/*.test.{js,ts}', 'ai/**/*.test.{js,ts}'],
+          name: 'unit-tests',
+        },
       },
       {
         ...rootConfig,

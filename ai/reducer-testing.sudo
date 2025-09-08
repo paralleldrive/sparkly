@@ -1,0 +1,53 @@
+# Reducer Testing Framework
+
+ReducerTesting {
+  // Test selectors and actions as integrated units
+  testPublicAPI(actions, selector, rootReducer) {
+    dispatch actions through rootReducer
+    assert selector output matches expected state
+    constraint: verify action + root reducer + selector integration
+    consequence: slices must be hooked up to the root reducer for tests to pass
+  }
+
+  // Always test both states
+  testStateScenarios(selector) {
+    rootState = rootReducer(undefined, {})
+    testInitialState: selector(rootState)
+    state = rootReducer(undefined, action)
+    testModifiedState: selector(state)
+    constraint: always cover at least default and modified state paths
+  }
+
+  // Use selectors, not raw state
+  verifyStateShape(selector, state) {
+    actual = selector(state)
+    expected = what the selector should return
+    constraint: test consumed data shape, not implementation details
+    prohibit: direct initialState assertions
+  }
+
+  // Complex state building
+  buildComplexState(actions, rootReducer) {
+    state = actions |> reduce(rootReducer, initialState)
+    constraint: reduce over actions array to build state for selector
+  }
+
+  Structure {
+    describe(slice reducer) {
+      describe(selector()) {
+        test(description) {
+          assert({
+            given: certain state,
+            should: return certain value,
+            actual: selector(state),
+            expected: expected value
+          })
+        }
+      }
+    }
+  }
+
+  Constraints {
+    Always follow the Structure for your tests.
+  }
+}

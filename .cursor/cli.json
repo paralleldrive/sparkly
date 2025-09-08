@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Write(src/**)",
+      "Write(ai/**)",
+      "Shell(pwd)",
+      "Shell(ls)",
+      "Shell(cat)",
+      "Shell(head)",
+      "Shell(find)",
+      "Shell(grep)",
+      "Shell(git)",
+      "Shell(mkdir)",
+      "Shell(touch)",
+      "Shell(cp)",
+      "Shell(mv)",
+      "Shell(bash)",
+      "Shell(sh)",
+      "Shell(echo)",
+      "Shell(tee)",
+      "Shell(printf)",
+      "Shell(rm)",
+      "Shell(sed)",
+      "Shell(awk)",
+      "Shell(tr)",
+      "Shell(npm)",
+      "Shell(npx)",
+      "Shell(vitest)",
+      "Shell(node)",
+      "Shell(pnpm)",
+      "Shell(yarn)"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Write(.env*)",
+      "Read(**/*.key)",
+      "Write(**/*.key)",
+      "Write(node_modules/**)"
+    ]
+  }
+}
