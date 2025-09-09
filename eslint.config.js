@@ -35,9 +35,9 @@ export default tseslint.config(
   // 4. Add other plugins' recommended configs
   eslintPluginUnicorn.configs['flat/recommended'],
 
-  // 5. Your main configuration object for custom rules and overrides
+  // 5. TypeScript files with type-aware linting
   {
-    files: ['**/*.{js,ts,jsx,tsx}'],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parserOptions: {
         // This enables type-aware linting rules
@@ -122,7 +122,49 @@ export default tseslint.config(
     },
   },
 
-  // 6. Vitest configuration for test files
+  // 6. JavaScript/JSX files without type-aware linting
+  {
+    files: ['**/*.{js,jsx}'],
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      // --- Your Custom Simple Import Sort Rules ---
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
+
+      // --- Your Custom Unicorn Rules ---
+      'unicorn/better-regex': 'warn',
+      'unicorn/no-process-exit': 'off',
+      'unicorn/no-array-reduce': 'off',
+      'unicorn/no-array-callback-reference': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/prevent-abbreviations': [
+        'error',
+        {
+          replacements: {
+            args: false,
+            params: false,
+            props: false,
+            utils: false,
+          },
+        },
+      ],
+      'unicorn/filename-case': [
+        'error',
+        {
+          case: 'kebabCase',
+          ignore: [
+            /.*\._index\.(tsx|ts)$/,
+            /.*\$[A-Za-z]+Slug(\.[A-Za-z]+)*\.(tsx|ts)$/,
+            /.*_\.[A-Za-z]+\.(tsx|ts)$/,
+          ],
+        },
+      ],
+    },
+  },
+
+  // 7. Vitest configuration for test files
   {
     files: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     ...vitest.configs.recommended,
@@ -132,7 +174,7 @@ export default tseslint.config(
     },
   },
 
-  // 7. Playwright configuration for E2E test files
+  // 8. Playwright configuration for E2E test files
   {
     files: ['playwright/**/*.e2e.ts'],
     ...playwright.configs['flat/recommended'],
@@ -144,6 +186,6 @@ export default tseslint.config(
     },
   },
 
-  // 8. Prettier config must be last to override other formatting rules
+  // 9. Prettier config must be last to override other formatting rules
   eslintPluginPrettierRecommended,
 );
