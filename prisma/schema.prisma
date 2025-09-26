@@ -1,0 +1,77 @@
+// Prisma schema for passwordless authentication with Supabase
+// Supports magic link and passkey (WebAuthn) authentication
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String   @default("")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  magicLinks MagicLink[]
+  passkeys   Passkey[]
+  sessions   Session[]
+
+  @@map("users")
+}
+
+model MagicLink {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  token     String    @unique
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("magic_links")
+}
+
+model Passkey {
+  id           String   @id @default(cuid())
+  userId       String   @map("user_id")
+  credentialId String   @unique @map("credential_id")
+  publicKey    Bytes    @map("public_key")
+  counter      BigInt   @default(0)
+  name         String? // Optional name for the passkey (e.g., "iPhone", "MacBook")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("passkeys")
+}
+
+model Session {
+  id               String     @id @default(cuid())
+  userId           String     @map("user_id")
+  token            String     @unique
+  refreshToken     String     @unique @map("refresh_token")
+  expiresAt        DateTime   @map("expires_at")
+  refreshExpiresAt DateTime   @map("refresh_expires_at")
+  authMethod       AuthMethod @map("auth_method")
+  createdAt        DateTime   @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+enum AuthMethod {
+  MAGIC_LINK
+  PASSKEY
+}

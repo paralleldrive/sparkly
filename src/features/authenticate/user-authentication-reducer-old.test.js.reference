@@ -1,0 +1,124 @@
+import { assert } from 'riteway/vitest';
+import { describe, test } from 'vitest';
+
+import rootReducer from '../../redux/root-reducer.js';
+import {
+  selectEmailError,
+  selectNameError,
+  signUpClicked,
+  signUpFailed,
+} from './user-authentication-reducer-old.js';
+
+describe('selectEmailError()', () => {
+  test('initial state', () => {
+    const rootState = rootReducer(undefined, {});
+
+    assert({
+      given: 'the application starts',
+      should: 'initialize with no email error',
+      actual: selectEmailError(rootState),
+      expected: '',
+    });
+  });
+
+  test('sign up fails with email error', () => {
+    const state = rootReducer(
+      undefined,
+      signUpFailed({ emailError: 'Invalid email format' }),
+    );
+
+    assert({
+      given: 'sign up fails with only email error',
+      should: 'set email error message',
+      actual: selectEmailError(state),
+      expected: 'Invalid email format',
+    });
+  });
+
+  test('sign up clicked clears errors', () => {
+    const actions = [
+      signUpFailed({ emailError: 'Previous error' }),
+      signUpClicked({ name: 'John Doe', email: 'john@example.com' }),
+    ];
+    const state = actions.reduce(rootReducer, rootReducer(undefined, {}));
+
+    assert({
+      given: 'sign up is clicked after previous error',
+      should: 'clear email error',
+      actual: selectEmailError(state),
+      expected: '',
+    });
+  });
+
+  test('multiple sign up failures', () => {
+    const actions = [
+      signUpFailed({ emailError: 'First error' }),
+      signUpFailed({ emailError: 'Second error' }),
+    ];
+    const state = actions.reduce(rootReducer, rootReducer(undefined, {}));
+
+    assert({
+      given: 'multiple sign up failures occur',
+      should: 'update to latest email error',
+      actual: selectEmailError(state),
+      expected: 'Second error',
+    });
+  });
+});
+
+describe('selectNameError()', () => {
+  test('initial state', () => {
+    const rootState = rootReducer(undefined, {});
+
+    assert({
+      given: 'the application starts',
+      should: 'initialize with no name error',
+      actual: selectNameError(rootState),
+      expected: '',
+    });
+  });
+
+  test('sign up fails with name error', () => {
+    const state = rootReducer(
+      undefined,
+      signUpFailed({ nameError: 'Name cannot be empty' }),
+    );
+
+    assert({
+      given: 'sign up fails with only name error',
+      should: 'set name error message',
+      actual: selectNameError(state),
+      expected: 'Name cannot be empty',
+    });
+  });
+
+  test('sign up clicked clears errors', () => {
+    const actions = [
+      signUpFailed({ nameError: 'Previous error' }),
+      signUpClicked({ name: 'John Doe', email: 'john@example.com' }),
+    ];
+    const state = actions.reduce(rootReducer, rootReducer(undefined, {}));
+
+    assert({
+      given: 'sign up is clicked after previous error',
+      should: 'clear name error',
+      actual: selectNameError(state),
+      expected: '',
+    });
+  });
+
+  test('multiple sign up failures', () => {
+    const actions = [
+      signUpFailed({ nameError: 'First name error' }),
+      signUpFailed({ nameError: 'Second name error' }),
+    ];
+    const state = actions.reduce(rootReducer, rootReducer(undefined, {}));
+
+    assert({
+      given: 'multiple sign up failures occur',
+      should: 'update to latest name error',
+      actual: selectNameError(state),
+      expected: 'Second name error',
+    });
+  });
+});

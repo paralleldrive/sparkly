@@ -1,0 +1,76 @@
+---
+description: Guidelines for testing Redux reducers using selector-focused approach
+globs:
+alwaysApply: false
+---
+
+# Reducer Testing
+
+function test() {
+  actual = selector(state)
+  expected = what the selector should return
+}
+
+ReducerTesting {
+  Constraints {
+    Test from the perspective of a selector.
+    Group tests by selectors (one describe block per selector).
+    Verify action + root reducer + selector integration.
+    Assert selector output matches expected value.
+    When state depends on multiple actions, reduce over an array of actions.
+    Keep tests focused and minimal - avoid over-testing edge cases.
+    No factories for simple test data - use inline objects.
+    Only use factories for complex database entities.
+  }
+
+  TestStructure {
+    // Group by selector
+    describe('selectEmailError()', () => {
+      test('initial state', () => {
+        const rootState = rootReducer(undefined, {});
+        
+        assert({
+          given: 'the application starts',
+          should: 'initialize with no email error',
+          actual: selectEmailError(rootState),
+          expected: '',
+        });
+      });
+
+      test('action sets error', () => {
+        const state = rootReducer(undefined, signUpFailed({ emailError: 'Invalid email' }));
+
+        assert({
+          given: 'sign up fails with email error',
+          should: 'set email error message',
+          actual: selectEmailError(state),
+          expected: 'Invalid email',
+        });
+      });
+
+      test('action clears error', () => {
+        const actions = [
+          signUpFailed({ emailError: 'Previous error' }),
+          signUpClicked({ email: 'valid@email.com' }),
+        ];
+        const state = actions.reduce(rootReducer, rootReducer(undefined, {}));
+
+        assert({
+          given: 'new sign up action after error',
+          should: 'clear previous error',
+          actual: selectEmailError(state),
+          expected: '',
+        });
+      });
+    });
+  }
+
+  ActionSequences {
+    // Single action
+    const state = rootReducer(undefined, someAction());
+    
+    // Multiple actions
+    const actions = [firstAction(), secondAction()];
+    const state = actions.reduce(rootReducer, rootReducer(undefined, {}));
+  }
+}
