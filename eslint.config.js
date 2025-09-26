@@ -23,8 +23,14 @@ const compat = new FlatCompat({
 export default tseslint.config(
   includeIgnoreFile(gitignorePath),
   eslint.configs.recommended,
-  tseslint.configs.recommendedTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked.map(config => ({
+    ...config,
+    files: ['**/*.{ts,tsx}'],
+  })),
+  ...tseslint.configs.stylisticTypeChecked.map(config => ({
+    ...config,
+    files: ['**/*.{ts,tsx}'],
+  })),
   // Next.js ESLint configuration
   ...compat.config({
     extends: ['next/core-web-vitals', 'next/typescript'],

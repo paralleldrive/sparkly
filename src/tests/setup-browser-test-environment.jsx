@@ -10,6 +10,8 @@ vi.mock('next/font/google', () => ({
 }));
 
 vi.mock('next/image', () => ({
-  // eslint-disable-next-line @next/next/no-img-element
-  default: props => <img alt="Next.js image mock" {...props} />,
+  default: ({ priority: _priority, fill: _fill, ...props }) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img alt="Next.js image mock" {...props} />
+  ),
 }));

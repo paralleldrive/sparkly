@@ -1,0 +1,91 @@
+---
+description: Guidelines for testing React components using riteway render-component approach
+globs:
+alwaysApply: false
+---
+
+# React Component Testing
+
+function test() {
+  actual = $(selector).someMethod()
+  expected = what the element should contain/return
+}
+
+ReactComponentTesting {
+  Constraints {
+    Test from the perspective of rendered output.
+    Group tests by component (one describe block per component).
+    Use riteway/render-component for rendering.
+    Assert rendered elements match expected output.
+    Keep tests focused on essential UI elements and behavior.
+    Use createProps factory helper for prop variations.
+    Test error states separately from happy paths.
+    Avoid classes as selectors.
+    Prefer semantic selectors (if possible).
+  }
+
+  TestStructure {
+    // Component with props helper
+    const createProps = ({ nameError = '' } = {}) => ({ nameError });
+
+    describe('RegisterForm component', () => {
+      test('basic elements', () => {
+        const props = createProps();
+        const $ = render(<RegisterForm {...props} />);
+
+        assert({
+          given: 'any props',
+          should: 'render the title',
+          actual: $('h1').text(),
+          expected: 'Create an account',
+        });
+
+        assert({
+          given: 'any props',
+          should: 'render the name input field',
+          actual: $('input[name="name"]').length,
+          expected: 1,
+        });
+      });
+
+      test('error messages', () => {
+        const props = createProps({
+          nameError: 'Name is required',
+          emailError: 'Invalid email address',
+        });
+        const $ = render(<RegisterForm {...props} />);
+
+        assert({
+          given: 'name error prop',
+          should: 'render the name error message',
+          actual: $('[data-slot="form-message"]').eq(0).text(),
+          expected: 'Name is required',
+        });
+      });
+    });
+
+    // Simple component without props
+    describe('LandingPage component', () => {
+      test('renders Next.js logo', () => {
+        const $ = render(<LandingPage />);
+
+        assert({
+          given: 'the LandingPage component is rendered',
+          should: 'display the Next.js logo',
+          actual: $('img[alt="Next.js logo"]').length,
+          expected: 1,
+        });
+      });
+    });
+  }
+
+  PropHelpers {
+    const createProps = ({
+      error = '',
+      loading = false,
+      onSubmit = () => {},
+    } = {}) => ({ error, loading, onSubmit });
+    
+    const props = createProps({ loading: true });
+  }
+}
