@@ -1,4 +1,4 @@
-export default {
+const config = {
   arrowParens: 'avoid',
   bracketSameLine: false,
   bracketSpacing: true,
@@ -16,3 +16,5 @@ export default {
   trailingComma: 'all',
   useTabs: false,
 };
+
+export default config;

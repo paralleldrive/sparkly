@@ -23,9 +23,7 @@ const compat = new FlatCompat({
 export default tseslint.config(
   includeIgnoreFile(gitignorePath),
   eslint.configs.recommended,
-  tseslint.configs.recommendedTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
-  // Next.js ESLint configuration
+  // Next.js ESLint configuration (includes its own TypeScript config)
   ...compat.config({
     extends: ['next/core-web-vitals', 'next/typescript'],
   }),
