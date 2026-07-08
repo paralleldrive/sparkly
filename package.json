@@ -10,7 +10,7 @@
     "@eslint/js": "9.33.0",
     "@tailwindcss/postcss": "4.1.12",
     "@tailwindcss/vite": "4.1.12",
-    "@types/node": "24.3.0",
+    "@types/node": "24.13.3",
     "@playwright/test": "1.54.2",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
